@@ -1,5 +1,6 @@
 import React from "react"
-import Exercise from "./excercise"
+import Exercise from "./Excercise"
+import styles from "../../styles/DayField.module.css"
 
 export interface excercise {
   id: number
@@ -18,7 +19,7 @@ export interface props {
 
 const DayField = ({day, excercises}: props) => {
   return (
-    <div>
+    <div className="container">
       <h2>{day}</h2>
 
       {excercises? excercises.map(excercise => <Exercise key={excercise.id}
