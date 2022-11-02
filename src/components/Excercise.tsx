@@ -11,16 +11,6 @@ export interface props {
   notes?: string
 }
 
-const Stack = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: 5px;
-  `
-
 const TextField = styled.input`
   width: 100%;
   height: 100%;
@@ -29,10 +19,19 @@ const TextField = styled.input`
   `
 
 const Exercise = ({id=0, name, sets, reps, intensity, rpe, notes}: props) => {
+  if (id === 0) {
+    return (
+      <div>
+        <TextField type="text" placeholder="Excercise" />
+      </div>
+    )
+  }
   return (
-    <Stack>
-        <TextField />
-    </Stack>
+    <div>
+      <p>{name} <br />
+      {sets}x{reps} @ {rpe? rpe: intensity} <br />
+      {notes} </p>
+    </div>
   )
 }
 
