@@ -1,5 +1,5 @@
-import { Stack, TextField } from "@mui/material";
 import React from "react";
+import styled from 'styled-components'
 
 export interface props {
   id?: number
@@ -11,12 +11,27 @@ export interface props {
   notes?: string
 }
 
+const Stack = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  `
+
+const TextField = styled.input`
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  border: 1px solid #e0e0e0;
+  `
+
 const Exercise = ({id=0, name, sets, reps, intensity, rpe, notes}: props) => {
   return (
     <Stack>
-      <Stack direction="row" spacing="1">
-        <TextField label="Excercise" variant="outlined"/>
-      </Stack>
+        <TextField />
     </Stack>
   )
 }

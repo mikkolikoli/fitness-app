@@ -1,24 +1,31 @@
-import { Stack } from '@mui/material'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import DayField from '../src/components/DayField'
-import styles from '../styles/Home.module.css'
+import styled from 'styled-components'
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #f5f5f5;
+  `
 
 const Home: NextPage = () => {
   return (
     <div className='container'>
       <h1>Fitness app</h1>
+      
+      <DayField day="monday" />
+      <DayField day="tuesday" />
+      <DayField day="wednesday" />
+      <DayField day="thursday" />
+      <DayField day="friday" />
+      <DayField day="saturday" />
+      <DayField day="sunday" />
 
-      <Stack direction="row" spacing="5">
-        <DayField day="monday" />
-        <DayField day="tuesday" />
-        <DayField day="wednesday" />
-        <DayField day="thursday" />
-        <DayField day="friday" />
-        <DayField day="saturday" />
-        <DayField day="sunday" />
-      </Stack>
     </div>
   )
 }

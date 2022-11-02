@@ -1,5 +1,6 @@
 import React from "react"
 import Exercise from "./Excercise"
+import styled from 'styled-components'
 import styles from "../../styles/DayField.module.css"
 
 export interface excercise {
@@ -17,9 +18,22 @@ export interface props {
   excercises?: [excercise]
 }
 
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    `
+
 const DayField = ({day, excercises}: props) => {
+
   return (
-    <div className="container">
+    <Container>
       <h2>{day}</h2>
 
       {excercises? excercises.map(excercise => <Exercise key={excercise.id}
@@ -31,7 +45,7 @@ const DayField = ({day, excercises}: props) => {
                                                         rpe={excercise.rpe}
                                                         notes={excercise.notes} />) :
       <Exercise />}
-    </div>
+    </Container>
   )
 }
 
