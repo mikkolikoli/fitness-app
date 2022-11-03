@@ -14,6 +14,8 @@ const Container = styled.div`
   `
 
 const Home: NextPage = () => {
+  const excercises = fetch('http://localhost:3000/api/excercises').then(res => res.json())
+
   return (
     <div className='container'>
       <h1>Fitness app</h1>

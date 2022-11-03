@@ -3,7 +3,7 @@ import Exercise from "./Excercise"
 import styled from 'styled-components'
 import styles from "../../styles/DayField.module.css"
 
-export interface excercise {
+interface excercise {
   id: number
   name: string
   sets: number
@@ -13,7 +13,7 @@ export interface excercise {
   notes?: string
 }
 
-export interface props {
+interface props {
   day: string
   excercises?: [excercise]
 }

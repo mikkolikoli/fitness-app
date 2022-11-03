@@ -2,20 +2,20 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import mongoose from 'mongoose'
 
 type Data = {
-  userId: String,
+  userId: string,
   excercises: [Excercise]
 }
 
 type Excercise = {
-  id: Number,
-  day: String,
-  week: Number,
-  name: String,
-  sets: Number,
-  reps: Number,
-  weight: Number,
-  rpe: Number,
-  notes: String
+  id: number,
+  day: string,
+  week: number,
+  name: string,
+  sets: number,
+  reps: number,
+  weight: number,
+  rpe: number,
+  notes: string
 }
 
 if (process.env.MONGODB_URI) {
@@ -38,9 +38,20 @@ const excerciseListSchema = new mongoose.Schema({
 })
 const ExcerciseList = mongoose.model('ExcerciseList', excerciseListSchema)
 
-const getExcercises = (userId:string, week: Number) => {
+const getExcercises = (userId:string, week: number) => {
+  const excerciseList = ExcerciseList.find({ userId: userId, excercises: { $elemMatch: { week: week } } })
 
+  if (excerciseList)
+  {
+    return {...excerciseList}
+  }
+  else
+  {
+    return undefined
+  }
 }
+
+const validateExcercise = (excerciseList: mongoose.Model<Excercise>) => {}
 
 async function addExcercise(userId: string, excercise: Excercise) {
   const excerciseList = await ExcerciseList.findOne({ userId: userId })
@@ -58,7 +69,13 @@ async function addExcercise(userId: string, excercise: Excercise) {
       rpe: excercise.rpe,
       notes: excercise.notes
     })
-    ExcerciseList.save()
+    excerciseList.save()
+
+    return {...excerciseList}
+  }
+  else 
+  {
+    return undefined
   }
 }
 
@@ -74,12 +91,15 @@ export default function handler(
     const { week } = req.body
     const excercises = getExcercises(userId, week)
 
-    res.status(200).json(excercises)
+    if (excercises)
+    {
+      res.status(200).json(excercises)
+    }
   }
   else if (req.method === 'POST') {
     const excercise = req.body
-    addExcercise(userId, excercise)
+    const addedExcercises = addExcercise(userId, excercise)
     
-    res.status(201).json(excercise)
+    res.status(201).json(addedExcercises)
   }
 }
